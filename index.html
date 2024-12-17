@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carta para Anna</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Georgia', serif;
+            background-color: #f8ebe4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        .start-screen {
+            text-align: center;
+            margin-top: 10%;
+        }
+
+        .snoopy-image {
+            width: 200px;
+            margin-bottom: 20px;
+        }
+
+        .enter-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #ff6f61;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .enter-button:hover {
+            background-color: #d4594a;
+        }
+
+        .cinematic {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        .card {
+            background: linear-gradient(145deg, #f9e7d6, #f8ebe4);
+            border: 1px solid #e4c7b6;
+            padding: 20px;
+            max-width: 603.95px;
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+            height: auto;
+        }
+
+        .text {
+            color: #943d2f;
+            font-size: 18px;
+            line-height: 1.5;
+            text-align: justify;
+            white-space: normal;
+            overflow-wrap: break-word;
+        }
+
+        @media (max-width: 768px) {
+            .card {
+                width: 100%;
+                height: auto;
+            }
+
+            .text {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .text {
+                font-size: 14px;
+                line-height: 1.4;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="start-screen" id="startScreen">
+        <div class="snoopy-img">
+            <img src="img/pngwing.com.png" alt="Snoopy" class="snoopy-image">
+        </div>
+        <button class="enter-button" onclick="startCinematic()">Entrar</button>
+        <p class="benedetti-quote">
+            "Si hago cosas por ti, no es para que me quieras, es para que sepas que te quiero."
+        </p>
+        <p class="benedetti-quote">-Mario Benedetti</p>
+    </div>
+
+    <div class="cinematic" id="cinematic" style="display: none;">
+        <div class="card">
+            <div class="text" id="text"></div>
+        </div>
+    </div>
+
+    <script>
+        function startCinematic() {
+            const startScreen = document.getElementById("startScreen");
+            const cinematic = document.getElementById("cinematic");
+            const textContainer = document.getElementById("text");
+
+            startScreen.style.display = "none";
+            cinematic.style.display = "flex";
+
+            const text = [
+                "Querida Anna,",
+                "",
+                "Hoy es un día especial, probablemente ni siquiera sepas el por qué.",
+                "Hace un mes exactamente, tomé la decisión de regalarte mi número para poder hablar más contigo.",
+                "Honestamente no esperaba que algo tan sencillo como eso fuera a cambiar tanto nuestra relación, pues desde entonces, nos hicimos más cercanos, cosa que permitió que haya algo más bonito y profundo que una simple amistad.",
+                "",
+                "Quiero decirte que eres la persona más genial que he conocido, eres hermosa, inteligente, buena persona, con metas, graciosa, y muchas cosas más que si tuviera que decir me tiro 3 años haciéndolo.",
+                "Te has vuelto muy especial para mí en este tiempo, muchísimo.",
+                "Quiero hacer tantas cosas contigo, desde cosas bonitas como pasar tiempo juntos y darnos mucho cariño y besitos; hasta tomarme el tiempo en conocer a la verdadera tú, que me muestres tus cicatrices para demostrarte que ninguna cosa a la que llames imperfección me hará quererte menos.",
+                "Quiero cuidarte, acompañarte, apoyarte en todas tus metas para que entiendas que no te dejaré sola, así me necesites o no.",
+                "",
+                "Me siento muy afortunado de tenerte, soy feliz de poder recibir tus mensajes de buenos días y de buenas noches.",
+                "Soy feliz de saber que eres la mujer con la que quiero estar hoy, mañana y si es posible el resto de mi vida.",
+                "Te quiero con todo mi corazón y haces que cada latido valga la pena.",
+                "",
+                "Con cariño, Noah."
+            ];
+
+            let paragraphIndex = 0;
+
+            function typeParagraph() {
+                if (paragraphIndex < text.length) {
+                    const paragraph = document.createElement("p");
+                    textContainer.appendChild(paragraph);
+
+                    let charIndex = 0;
+
+                    function typeCharacter() {
+                        if (charIndex < text[paragraphIndex].length) {
+                            paragraph.textContent += text[paragraphIndex][charIndex];
+                            charIndex++;
+                            setTimeout(typeCharacter, 50); // Velocidad de escritura (ajustable)
+                        } else {
+                            paragraphIndex++;
+                            setTimeout(typeParagraph, 500); // Tiempo entre párrafos
+                        }
+                    }
+
+                    typeCharacter();
+                }
+            }
+
+            typeParagraph();
+        }
+    </script>
+
+</body>
+</html>
